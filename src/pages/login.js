@@ -23,18 +23,19 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(userData);
+    
     dispatch(login(userData))
   }
 
   return (
     <div className='auth_page'>
-       <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
-            <div className="w-full p-6 m-auto lg:max-w-xl">
+       <div className="relative flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+            <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div className="flex justify-center items-center">
                     <img src={Logo} style={{width: '150px'}} alt='logo'/>
                 </div>
-                <form className="mt-6" onSubmit={handleSubmit} >
+                <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit} >
                     <div className="mb-2">
                       
                         <input
@@ -72,6 +73,7 @@ const Login = () => {
                         </button>
                     </div>
                 </form>
+                
                 <div className="relative flex items-center justify-center w-full mt-6 border border-t">
                     <div className="absolute px-5 bg-white">Or</div>
                 </div>
@@ -119,6 +121,7 @@ const Login = () => {
                         </Link>
                   
                 </p>
+                </div>
             </div>
         </div>
     </div>
