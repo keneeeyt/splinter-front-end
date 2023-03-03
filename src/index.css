@@ -8,10 +8,12 @@
     margin: 0;
 }
 
+/* box hidden */
 #theme {
     display: none;
 }
 
+/* conver color to black app component */
 #theme:checked ~ .App {
     filter: invert(1);
 }
