@@ -79,7 +79,7 @@
     border: 1px solid #F89C1C
   }
   
-.active {
+ul li.active {
     border-bottom: 3px solid #F89C1C;
     border-radius: 0%;
     color: #F89C1C;
@@ -92,3 +92,8 @@ ul li.active:hover{
     background-color: white;
 }
 
+.searchBackground:focus {
+    width: 218px;
+    background-color: black;
+    box-shadow:0 3px 10px rgb(0 0 0 / 0.2);
+}

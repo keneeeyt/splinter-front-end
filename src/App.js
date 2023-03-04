@@ -7,9 +7,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import Home from './pages/home';
 import { useEffect } from 'react';
 import { refreshToken } from './redux/action/userAction';
-import Header from './components/Header';
+import Header from './components/header/Header';
 import Footer from './components/Footer';
+import Register from './pages/register';
 
+import { Navigate } from 'react-router-dom';
 
 function App() {
   const { auth } = useSelector(state => state)
@@ -32,8 +34,9 @@ function App() {
         
         <Routes>
           <Route path='/' element={auth.token ? <Home /> : <Login />} />
-          <Route path="/:page" element={<PageRender />} />
-          <Route path="/:page/:id" element={<PageRender />} />
+          <Route path='/register' element={<Register />} />
+          <Route path="/:page" element={auth.token ? <PageRender /> : <Navigate to = '/' />} />
+          <Route path="/:page/:id" element={auth.token ? <PageRender /> : <Navigate to = '/' />} />
         </Routes>
         {!auth.token && <Footer />}
       </div>

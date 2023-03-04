@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link, useLocation} from 'react-router-dom';
-import Logo from '../images/icon.png';
+import Logo from '../../images/icon.png';
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { TbSmartHome } from 'react-icons/tb'
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../redux/action/userAction';
+import { logout } from '../../redux/action/userAction';
 import { BiMessage } from 'react-icons/bi';
 import { RiCompassDiscoverLine, RiNotification3Line } from 'react-icons/ri';
-import { TYPES } from '../redux/action/notifyAction';
-import Avatar from './Avatar';
+import { TYPES } from '../../redux/action/notifyAction';
+import Avatar from '../Avatar';
+import Search from './Search';
 
 
 function classNames(...classes) {
@@ -62,19 +63,8 @@ const Header = () => {
                 </div>
                 <div>
             
-                <div className="flex items-center justify-center md:pl-5">
-                <form className='mt-1'>
-                  <div className="relative text-gray-400 focus-within:text-gray-400">
-                    <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                      <button type="submit" className="p-1 focus:outline-none focus:shadow-outline">
-                        <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                      </button>
-                    </span>
-                    <input type="search" name="q" className="py-2 text-sm text-white bg-gray-100 rounded-full border-none pl-10 outline-none focus:ring-0 focus:text-gray-900" placeholder="Search Splinter" autoComplete="off" />
-                  </div>
-                </form>
-              </div>
-
+                      {/* seacrch */}
+                      <Search />
 
                 </div>
                 

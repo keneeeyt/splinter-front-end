@@ -14,7 +14,7 @@ export const login = (data) => async(dispatch) => {
          dispatch({
             type: 'AUTH',
             payload: {token: res.data.accessToken,
-            user: res.data.user
+            user: res.data.User
             }
          }) 
 
