@@ -14,7 +14,7 @@ export const login = (data) => async(dispatch) => {
          dispatch({
             type: 'AUTH',
             payload: {token: res.data.accessToken,
-            user: res.data.User
+            user: res.data.user
             }
          }) 
 
@@ -45,7 +45,7 @@ export const refreshToken = () => async (dispatch) => {
             dispatch({
                 type: 'AUTH',
                 payload: {token: res.data.access_token,
-                user: res.data.User
+                user: res.data.user
                 }
              }) 
              dispatch({type: 'NOTIFY', payload: {} })
@@ -83,6 +83,23 @@ export const register = (data) => async (dispatch) => {
                 payload: {success:res.data.msg}
              }) 
     }catch(err) {
+        dispatch({ 
+            type: 'NOTIFY', 
+            payload: {
+                error: err.response.data.msg
+            } 
+        })
+    }
+}
+
+
+export const logout = () => async (dispatch) => {
+    try {
+        localStorage.removeItem('firstLogin')
+        await postData('logout')
+        window.location.href = '/'
+
+    }catch(err){
         dispatch({ 
             type: 'NOTIFY', 
             payload: {

@@ -1,4 +1,8 @@
+// GLOBAL TYPES
+
+
 export const TYPES = {
-    NOTIFY: 'NOTIFY'
+    NOTIFY: 'NOTIFY',
+    THEME: 'THEME'
 }
 

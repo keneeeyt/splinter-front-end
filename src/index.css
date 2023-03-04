@@ -21,7 +21,7 @@
 .App{
     width: 100%;
     min-height: 100vh;
-    background: white;
+    background: #F0F2F5;
 }
 
 .loading {
@@ -79,4 +79,16 @@
     border: 1px solid #F89C1C
   }
   
-  
+.active {
+    border-bottom: 3px solid #F89C1C;
+    border-radius: 0%;
+    color: #F89C1C;
+    
+}
+
+ul li.active:hover{
+    border-bottom: 2px solid #F89C1C;
+    border-radius: 0%;
+    background-color: white;
+}
+

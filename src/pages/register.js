@@ -4,6 +4,7 @@ import  { useNavigate }  from 'react-router-dom';
 import Logo from '../images/logo.png';
 import { Link } from 'react-router-dom';
 import { register } from '../redux/action/userAction';
+import Getapp from '../components/Getapp';
 const Register = () => {
 
   const { auth, notify } = useSelector(state => state)
@@ -92,11 +93,12 @@ const handleSubmit = (event) => {
                            <h5 className='text-gray-500 dark:text-gray-400 text-center text-xs mt-5'> By creating an account, you agree to Splinter's <Link className='underline underline-offset-2 text-[#F26F21] '>Privacy Policy</Link> and <Link className='underline underline-offset-2 text-[#F26F21]'>Terms of Use</Link></h5>
                     <button type="submit" className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#F26F21] rounded-md hover:bg-[#F89C1C] focus:outline-none focus:bg-[#F26F21] disabled:opacity-30">Create an account</button>
                     <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                        Already have an account? <span className="font-medium text-primary-600 hover:underline dark:text-primary-500"><Link to='/login' className="font-medium text-[#F26F21] hover:underline">Login here</Link></span>
+                        Already have an account? <span className="font-medium text-primary-600 hover:underline dark:text-primary-500"><Link to='/' className="font-medium text-[#F26F21] hover:underline">Login here</Link></span>
                     </p>
                 </form>
             </div>
         </div>
+        <Getapp />
     </div>
 
   

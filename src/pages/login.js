@@ -1,8 +1,10 @@
-import React,{ useState }from 'react';
+import React,{ useState, useEffect }from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../images/logo.png';
 import { login } from '../redux/action/userAction';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Getapp from '../components/Getapp';
 
 const Login = () => {
   
@@ -13,13 +15,21 @@ const Login = () => {
   const { email, password} = userData;
 
   const [typePass, setTypePass] = useState(false)
- 
+ const { auth } = useSelector(state => state)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
       const {name, value} = event.target
       setUserData({...userData, [name]:value})
   }
+
+  
+ useEffect(()=> {
+    if(auth.token){
+      navigate('/')
+    }
+   },[auth.token, navigate])
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -123,6 +133,7 @@ const Login = () => {
                 </p>
                 </div>
             </div>
+            <Getapp />
         </div>
     </div>
   )
