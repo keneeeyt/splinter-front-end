@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,  } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getData } from '../../utils/fetchData';
 import { TYPES } from '../../redux/action/notifyAction';
 import { Link } from 'react-router-dom';
 import UserCard from '../UserCard';
+import loadIcon from '../../images/loading.gif'
+
 
 const Search = () => {
 
@@ -11,28 +13,43 @@ const Search = () => {
 
     const [users, setUsers] = useState([]);
     const { auth } = useSelector(state => state);
+    const [load, setLoad] = useState(false)
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        if(search && auth.token){
-            getData(`search?userName=${search}`, auth.token)
-            .then(res => setUsers(res.data.users)) 
-            .catch(err => {
-                dispatch({type:TYPES, payload: {error: err.response.data.msg}})
-            })
-        }else {
-            setUsers([])
-        }
-    },[search, auth.token, dispatch])
+ 
 
     const handleClose = () => {
         setSearch('')
         setUsers([])
     }
+
+    const handleSearch = async (event) => {
+        event.preventDefault();
+         if(!search) return;
+
+            setLoad(true)
+          getData(`search?userName=${search}`, auth.token)
+          .then(data => {
+            setUsers(data.data.users)
+            setLoad(false)
+          })
+          .catch(err => {
+                
+            dispatch({
+                type:TYPES.NOTIFY,
+                payload: {error: err.response.data.msg}
+            })
+          })
+    
+           
+       
+        
+
+    }
   return (
     
     <div className="flex items-center justify-center md:pl-5">
-    <form className='mt-1'>
+    <form className='mt-1' onSubmit={handleSearch}>
       <div className="relative text-gray-400 focus-within:text-gray-400">
         <span className="absolute inset-y-0 left-0 flex items-center pl-2">
           <button type="submit" className="p-1 focus:outline-none focus:shadow-outline absolute z-50">
@@ -46,15 +63,23 @@ const Search = () => {
             <div onClick={handleClose} className='absolute top-[.1rem] text-2xl text-red-600 z-50 cursor-pointer left-[10.8rem]'style={{opacity: users.length===0 ? 0 : 1}}>
                 &times;
             </div>
+           { users.length === 0 ? load && <img src={loadIcon} alt='loading' className='absolute top-[50%] right-[14px] w-[15px] h-[15px] translate-y-[-50%] '/> : null }
       </div>
+      
+       
+      
                 
       <div  className='users absolute w-[6%] min-w-[218px] bg-white'>
             { 
                  
                search && users.map(user => (
-                    <Link key={user._id} to = {`/profile/${user._id}`} onClick={handleClose}>
-                        <UserCard user={user} />
-                    </Link>
+                 
+                        <UserCard 
+                        user={user} 
+                        key={user._id}
+                        handleClose={handleClose}    
+                        />
+                   
                 ))
                 
                  

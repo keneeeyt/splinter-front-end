@@ -20,21 +20,20 @@ function classNames(...classes) {
 const Header = () => {
 
   const navigation = [
-    { label: "Home", icon: <TbSmartHome size={24} />, path:'/' , current:false},
+    { label: "Home", icon: <TbSmartHome size={24} />, path:'/' , current:true},
     { label: "Message", icon: <BiMessage size={24} />, path: '/message', current:false },
     { label: "Discover", icon: <RiCompassDiscoverLine size={24} />, path: '/discover', current:false },
     { label: "notify", icon: <RiNotification3Line size={24} />, path: '/notify', current:false }
   ];
 
   const { auth, theme } =useSelector(state => state)
-  console.log(auth)
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const isActive = (pn) => {
     if(pn === pathname) return 'active'
   }
   return (
-    <Disclosure as="nav" className='bg-[#fff] drop-shadow-sm'>
+     <Disclosure as="nav" className='bg-[#fff] drop-shadow-sm'>
       {({ open }) => (
         <>
           <div className="max-w-8xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -179,9 +178,8 @@ const Header = () => {
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
                 <Disclosure.Button
+                as = {Link} to = {item.path}
                   key={item.label}
-                  as="a"
-                  href={item.path}
                   className={classNames(
                     item.current
                       ? "bg-[#F26F21] text-white"

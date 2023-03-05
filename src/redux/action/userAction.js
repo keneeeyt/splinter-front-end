@@ -41,7 +41,6 @@ export const refreshToken = () => async (dispatch) => {
         dispatch({type: 'NOTIFY', payload: {loading: true} })
         try {
             const res = await postData('refresh_token')
-            console.log(res)
             dispatch({
                 type: 'AUTH',
                 payload: {token: res.data.access_token,
