@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation} from 'react-router-dom';
-import Logo from '../../images/icon.png';
+import Logo from '../../images/iconHome.png';
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";

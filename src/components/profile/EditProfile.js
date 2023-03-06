@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BiCamera } from "react-icons/bi";
 import { checkImage } from "../../utils/imageUpload";
-import { TYPES } from '../../redux/action/notifyAction'
+import { TYPES } from '../../redux/action/notifyAction';
+import { updateProfileUser } from "../../redux/action/profileAction";
 
 const EditProfile = ({ user, setOnEdit }) => {
   const initState = {
@@ -14,11 +15,16 @@ const EditProfile = ({ user, setOnEdit }) => {
     address: "",
   };
   const [userData, setUserData] = useState(initState);
-  const { fullName, mobile, website, bio, address } = userData;
+  const { fullName, mobile, website, bio, address, gender } = userData;
 
   const [avatar, setAvatar] = useState("");
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
+
+  useEffect(()=> {
+    setUserData(user)
+  },[user])
+
 
   const changeAvatar = (event) => {
         const file = event.target.files[0]
@@ -30,6 +36,12 @@ const EditProfile = ({ user, setOnEdit }) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };
+  const handleSubmit = (e) => {
+      e.preventDefault();
+
+      dispatch(updateProfileUser({userData, avatar, auth}))
+      setOnEdit(false)
+  }
   return (
     <div className="fixed top-0 left-0 w-full h-[100vh] bg-[#0008] z-10 overflow-auto">
     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -41,7 +53,7 @@ const EditProfile = ({ user, setOnEdit }) => {
           	&times;
         </div>
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <form className="space-y-4 md:space-y-6">
+          <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
             <div className="info_avatar">
               <img
                 src={avatar ? URL.createObjectURL(avatar) : auth.user.avatar}
@@ -96,7 +108,7 @@ const EditProfile = ({ user, setOnEdit }) => {
                 <input
                   onChange={handleInput}
                   value={address}
-                  type="email"
+                  type="text"
                   name="address"
                   className="block w-full px-4 py-2 mt-2  bg-white border rounded-md focus:border-[#F26F21] focus:ring-[#F89C1C] focus:outline-none focus:ring focus:ring-opacity-40"
                   placeholder="Address"
@@ -130,11 +142,11 @@ const EditProfile = ({ user, setOnEdit }) => {
               </div>
               <div>
                 <select
+                value={gender}
                   name="gender"
                   onChange={handleInput}
                   className="mb-5 w-full rounded-lg focus:ring-0 focus:border-[#F89C1C]"
                 >
-                  <option>UPDATE GENDER</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                   <option value="other">Other</option>

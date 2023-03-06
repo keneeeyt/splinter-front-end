@@ -35,7 +35,7 @@ function App() {
         <Routes>
           <Route path='/' element={auth.token ? <Home /> : <Login />} />
           <Route path='/register' element={<Register />} />
-          <Route path="/:page" element={auth.token ? <PageRender /> : <Navigate to = '/' />} />
+          <Route path="/:page" element={auth.token  ? <PageRender /> : <Navigate to = '/' />} />
           <Route path="/:page/:id" element={auth.token ? <PageRender /> : <Navigate to = '/' />} />
         </Routes>
         {!auth.token && <Footer />}
