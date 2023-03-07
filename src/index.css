@@ -2,10 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+
 *{
     padding: 0;
     box-sizing: border-box;
     margin: 0;
+   
+}
+
+html {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
 }
 
 /* box hidden */
@@ -100,6 +110,38 @@ ul li.active:hover{
 }
 
 
+/* INFO SECTION PROFILE PIC */
+
+.info_profile{
+    width: 102px;
+    height: 102px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 10px auto;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.info_profile img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.icon_modal {
+    margin: 0 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.icon_modal #file {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
 
 
 
@@ -152,4 +194,32 @@ ul li.active:hover{
 
 ::-webkit-file-upload-button {
     cursor: pointer;
+}
+
+
+/* create post modal */
+
+.show_images {
+    max-height: 280px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    place-items: center;
+    padding: 10px 0;
+    grid-gap: 10px;
+}
+
+.show_images #file_img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.show_images #file_img img {
+    display: block;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
 }

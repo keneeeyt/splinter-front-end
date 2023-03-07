@@ -33,7 +33,7 @@ const Header = () => {
     if(pn === pathname) return 'active'
   }
   return (
-     <Disclosure as="nav" className='bg-[#fff] drop-shadow-sm'>
+     <Disclosure as="nav" className='bg-[#fff] drop-shadow-md'>
       {({ open }) => (
         <>
           <div className="max-w-8xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -173,8 +173,8 @@ const Header = () => {
               </div>
             </div>
           </div>
-
-          <Disclosure.Panel className="absolute w-full z-50 sm:hidden bg-[#fff]">
+        
+          <Disclosure.Panel className={`absolute w-[50%] right-0 z-50 sm:hidden bg-[#fff] rounded-md`}>
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
                 <Disclosure.Button

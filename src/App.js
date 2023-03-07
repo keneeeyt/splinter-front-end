@@ -10,11 +10,11 @@ import { refreshToken } from './redux/action/userAction';
 import Header from './components/header/Header';
 import Footer from './components/Footer';
 import Register from './pages/register';
-
+import StatusModal from './components/StatusModal'
 import { Navigate } from 'react-router-dom';
 
 function App() {
-  const { auth } = useSelector(state => state)
+  const { auth, status } = useSelector(state => state)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,7 +30,8 @@ function App() {
     <input type='checkbox' id='theme' />
     <div className="App">
     {auth.token && <Header />}
-      <div className='main max-w-[1500px] w-[100%] m-auto'>
+    {status && <StatusModal />}
+      <div className='main max-w-[1500px] w-[100%] m-auto' style={{ zIndex: '0'}}> 
         
         <Routes>
           <Route path='/' element={auth.token ? <Home /> : <Login />} />

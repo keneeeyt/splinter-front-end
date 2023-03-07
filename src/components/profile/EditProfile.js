@@ -18,7 +18,7 @@ const EditProfile = ({ user, setOnEdit }) => {
   const { fullName, mobile, website, bio, address, gender } = userData;
 
   const [avatar, setAvatar] = useState("");
-  const { auth } = useSelector((state) => state);
+  const { auth, theme } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(()=> {
@@ -59,6 +59,7 @@ const EditProfile = ({ user, setOnEdit }) => {
                 src={avatar ? URL.createObjectURL(avatar) : auth.user.avatar}
                 alt="avatar"
                 style={{ width: "100px" }}
+                className = {`${theme ? 'invert' : ''}`}
               />
               <span>
                 <BiCamera className="mx-auto"/>

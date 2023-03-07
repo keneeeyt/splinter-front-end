@@ -4,7 +4,8 @@
 export const TYPES = {
     NOTIFY: 'NOTIFY',
     THEME: 'THEME',
-    AUTH: 'AUTH'
+    AUTH: 'AUTH',
+    STATUS: 'STATUS'
 }
 
 export const EditData =(data, id, post) => {

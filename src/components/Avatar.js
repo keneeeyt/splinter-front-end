@@ -5,11 +5,9 @@ const Avatar = ({src, size}) => {
   return (
     <div className=''>
     <img
-     className={`h-10 w-10 rounded-full avatar ${size}`}
+     className={`h-10 w-10 rounded-full avatar ${size} ${theme ? 'invert' : ''}`}
      src={src}
     alt="userAvatar"
-
-    style={{filter:`${theme ? 'invert(1)' : 'invert(0)'}`}}
      />
      </div>
   )

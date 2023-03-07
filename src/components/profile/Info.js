@@ -10,7 +10,7 @@ import Following from "./Following";
 
 const Info = () => {
   const { id } = useParams();
-  const { auth, profile } = useSelector((state) => state);
+  const { auth, profile, theme } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const [userData, setUserData] = useState([]);
@@ -39,10 +39,12 @@ const Info = () => {
                 <div className="md:w-3/12 md:ml-16">
                   {/* <!-- profile image --> */}
                   <img
+                 
+
                     src={user.avatar}
-                    className="w-[100px] rounded-full md:w-[160px]"
+                    className={`info_profile  object-cover ${theme ? 'invert z-[-5]' : ''}`}
                     alt="avatar"
-                  />
+                   />
                 </div>
                 {/* <!-- profile meta --> */}
                 <div className="w-8/12 md:w-7/12 ml-4">
