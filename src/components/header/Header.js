@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation} from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from '../../images/iconHome.png';
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
@@ -20,20 +20,20 @@ function classNames(...classes) {
 const Header = () => {
 
   const navigation = [
-    { label: "Home", icon: <TbSmartHome size={24} />, path:'/' , current:true},
-    { label: "Message", icon: <BiMessage size={24} />, path: '/message', current:false },
-    { label: "Discover", icon: <RiCompassDiscoverLine size={24} />, path: '/discover', current:false },
-    { label: "notify", icon: <RiNotification3Line size={24} />, path: '/notify', current:false }
+    { label: "Home", icon: <TbSmartHome size={24} />, path: '/', current: true },
+    { label: "Message", icon: <BiMessage size={24} />, path: '/message', current: false },
+    { label: "Discover", icon: <RiCompassDiscoverLine size={24} />, path: '/discover', current: false },
+    { label: "notify", icon: <RiNotification3Line size={24} />, path: '/notify', current: false }
   ];
 
-  const { auth, theme } =useSelector(state => state)
+  const { auth, theme } = useSelector(state => state)
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const isActive = (pn) => {
-    if(pn === pathname) return 'active'
+    if (pn === pathname) return 'active'
   }
   return (
-     <Disclosure as="nav" className='bg-[#fff] drop-shadow-md'>
+    <Disclosure as="nav" className='bg-[#fff] drop-shadow-md'>
       {({ open }) => (
         <>
           <div className="max-w-8xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -51,39 +51,39 @@ const Header = () => {
               </div>
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex-shrink-0 flex items-center">
-                <Link to = '/'>
-                  <img
-                    className="hidden lg:inline-block h-9 w-auto"
-                    src={Logo}
-                    alt="Workflow"
-                    style={{width: '50px', height: 'auto', filter:`${theme ? 'invert(1)' : 'invert(0)'}`}}
-                  />
+                  <Link to='/'>
+                    <img
+                      className="hidden lg:inline-block h-9 w-auto"
+                      src={Logo}
+                      alt="Workflow"
+                      style={{ width: '50px', height: 'auto', filter: `${theme ? 'invert(1)' : 'invert(0)'}` }}
+                    />
                   </Link>
                 </div>
                 <div>
-            
-                      {/* seacrch */}
-                      <Search />
+
+                  {/* seacrch */}
+                  <Search />
 
                 </div>
-                
+
               </div>
               <div className="hidden sm:block sm:ml-6">
-                    
-                  <ul className="absolute left-[40%] top-[10px] w-full flex">
-                    {
-                      navigation.map((link,index) => (
-                        <li className={`hover:bg-gray-100 px-6 lg:px-10 py-2 rounded-lg  ${isActive(link.path)}`} key={index}>
-                            <Link to={link.path} className={ isActive(link.path)=== 'active' ? 'text-[#F89C1C]' : 'text-gray-400'} style={{filter:`${theme ? 'invert(1)' : 'invert(0)'}`}}>
-                             {link.icon}
-                            </Link>
-                        </li>
-                    ))
-                    }
 
-                  </ul>
-                
-                </div>
+                <ul className="absolute left-[37 %] top-[10px] w-full flex">
+                  {
+                    navigation.map((link, index) => (
+                      <li className={`hover:bg-gray-100 px-6 lg:px-10 py-2 rounded-lg  ${isActive(link.path)}`} key={index}>
+                        <Link to={link.path} className={isActive(link.path) === 'active' ? 'text-[#F89C1C]' : 'text-gray-400'} style={{ filter: `${theme ? 'invert(1)' : 'invert(0)'}` }}>
+                          {link.icon}
+                        </Link>
+                      </li>
+                    ))
+                  }
+
+                </ul>
+
+              </div>
               <div>
 
               </div>
@@ -107,42 +107,42 @@ const Header = () => {
                   >
                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
-                     
+
                         {({ active }) => (
-                          
-                           <Link to = {`/profile/${auth.user._id}`}
+
+                          <Link to={`/profile/${auth.user._id}`}
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                          
+
                             Your Profile
-                            </Link>
-                           
+                          </Link>
+
                         )}
-                    
+
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
                           <label htmlFor='theme'
-                           
+
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
-                            onClick={()=> dispatch({type: TYPES.THEME, payload: !theme })}
+                            onClick={() => dispatch({ type: TYPES.THEME, payload: !theme })}
                           >
-                          
+
                             {theme ? 'Light mode' : 'Dark mode'}
-                            
+
                           </label>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                            to = '/'
+                            to='/'
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
@@ -173,12 +173,12 @@ const Header = () => {
               </div>
             </div>
           </div>
-        
+
           <Disclosure.Panel className={`absolute w-[50%] right-0 z-50 sm:hidden bg-[#fff] rounded-md`}>
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
                 <Disclosure.Button
-                as = {Link} to = {item.path}
+                  as={Link} to={item.path}
                   key={item.label}
                   className={classNames(
                     item.current

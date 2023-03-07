@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 const Followers = ({ users, setShowFollowers }) => {
   const { auth } = useSelector((state) => state);
-  console.log(users)
   return (
     <div className="fixed top-0 left-0 w-full h-[100vh] bg-[#0008] z-10 overflow-auto">
       <div className="flex justify-center px-6 py-8 mx-auto mt-[10rem] lg:py-0">

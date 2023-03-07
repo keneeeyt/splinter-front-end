@@ -2,6 +2,12 @@ import React, { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Avatar from "./Avatar";
 import { TYPES } from "../redux/action/notifyAction";
+import { createPost } from "../redux/action/postAction";
+
+
+
+
+
 const StatusModal = () => {
   const { auth, theme } = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -50,11 +56,39 @@ const StatusModal = () => {
         }).catch(err => console.log(err))
     }
 }
+  const handleCapture = () => {
+      const width = videoRef.current.clientWidth;
+      const height = videoRef.current.clientHeight;
 
+      refCanvas.current.setAttribute('width', width)
+      refCanvas.current.setAttribute('height', height)
 
+      const ctx = refCanvas.current.getContext('2d')
+      ctx.drawImage(videoRef.current, 0,0, width, height)
+      let URL = refCanvas.current.toDataURL();
+      setImages([...images, {camera: URL}])
+  }
+
+  const handleStopStream = () => {
+    tracks.stop()
+    setStream(false)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if(images.length ===0)
+    return dispatch({type:TYPES.NOTIFY, payload: {error: 'Please add a picture!'}})
+
+    dispatch(createPost({content, images, auth}))
+    setContent('')
+    setImages([])
+    if(tracks) tracks.stop();
+    dispatch({type: TYPES.STATUS, payload: false})
+  }
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="flex items-center justify-center min-h-[50rem]">
           {/* dialog overlay  */}
           <div className="fixed inset-0 bg-black opacity-20" />
@@ -107,7 +141,7 @@ const StatusModal = () => {
                     name="content"
                     value={content}
                     className="w-full border-none focus:ring-0 placeholder-gray-700 text-xl"
-                    rows="6"
+                    rows="3 "
                     placeholder={`What's on your mind ${auth.user.userName} ?`}
                   />
 
@@ -115,7 +149,7 @@ const StatusModal = () => {
                     {images.map((img, index) => (
                       <div key={index} id="file_img" className="gap-2">
                         <img
-                          src={URL.createObjectURL(img)}
+                          src={img.camera? img.camera : URL.createObjectURL(img)}
                           alt="images"
                           style={{
                             filter: `${theme ? "invert(1)" : "invert(0)"}`,
@@ -133,7 +167,7 @@ const StatusModal = () => {
                   </div>
 
                   {stream && (
-                    <div className="stream">
+                    <div className="stream relative">
                       <video
                         autoPlay
                         muted
@@ -145,15 +179,28 @@ const StatusModal = () => {
                         height="100%"
                       />
 
-                      <span className="top-0">&times;</span>
-                      <canvas ref={refCanvas} />
+                      <span onClick={handleStopStream} className=" cursor-pointer absolute top-[-2px] right-[5px] text-red-600
+                      text-xl font-lg">&times;</span>
+                      <canvas ref={refCanvas} style={{display: 'none'}} />
                     </div>
                   )}
                 </div>
                 <hr className="mt-3 mb-3" />
-
                 <div className="relative flex justify-center cursor-pointer">
-                  <div className="">
+
+                {
+                    stream
+                    ? <div className="">
+                    <img
+                      className="h-7"
+                      src="https://res.cloudinary.com/dzosecp8f/image/upload/v1678208048/Martz90-Circle-Camera.512_yncuut.png"
+                      alt="camera"
+                      onClick={handleCapture}
+                    />
+                  </div> 
+                    : <>
+                      
+                    <div className="">
                     <img
                       className="h-7"
                       src="https://res.cloudinary.com/dzosecp8f/image/upload/v1678175565/Martz90-Circle-Camera.512_s3fjcd.png"
@@ -178,11 +225,16 @@ const StatusModal = () => {
                     />
                   </div>
 
+
+                    </>
+                  }
+                  
+
                   <div></div>
                 </div>
               </div>
               <div className="my-2 px-4 pb-2">
-                <button className="text-center w-full py-2 rounded-lg bg-[#F89C1C] text-white">
+                <button type="submit" className="text-center w-full py-2 rounded-lg bg-[#F89C1C] text-white">
                   Post
                 </button>
               </div>
