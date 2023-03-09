@@ -1,15 +1,15 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Avatar from "./Avatar";
 import { TYPES } from "../redux/action/notifyAction";
 import { createPost } from "../redux/action/postAction";
-
+import { updatePost } from "../redux/action/postAction";
 
 
 
 
 const StatusModal = () => {
-  const { auth, theme } = useSelector((state) => state);
+  const { auth, theme, status } = useSelector((state) => state);
   const dispatch = useDispatch();
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
@@ -79,13 +79,24 @@ const StatusModal = () => {
 
     if(images.length ===0)
     return dispatch({type:TYPES.NOTIFY, payload: {error: 'Please add a picture!'}})
-
-    dispatch(createPost({content, images, auth}))
+    if(status.onEdit){
+      dispatch(updatePost({content, images, auth,status}))
+    } else {
+      dispatch(createPost({content, images, auth}))
+    }
+    
     setContent('')
     setImages([])
     if(tracks) tracks.stop();
     dispatch({type: TYPES.STATUS, payload: false})
   }
+
+  useEffect(() => {
+    if(status.onEdit){
+      setContent(status.content)
+      setImages(status.images)
+    }
+  },[status])
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <form onSubmit={handleSubmit}>
@@ -149,7 +160,7 @@ const StatusModal = () => {
                     {images.map((img, index) => (
                       <div key={index} id="file_img" className="gap-2">
                         <img
-                          src={img.camera? img.camera : URL.createObjectURL(img)}
+                          src={img.camera? img.camera :img.url? img.url : URL.createObjectURL(img)}
                           alt="images"
                           style={{
                             filter: `${theme ? "invert(1)" : "invert(0)"}`,

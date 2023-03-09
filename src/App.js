@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import Register from './pages/register';
 import StatusModal from './components/StatusModal'
 import { Navigate } from 'react-router-dom';
+import { getPosts } from './redux/action/postAction';
 
 function App() {
   const { auth, status } = useSelector(state => state)
@@ -21,6 +22,9 @@ function App() {
     dispatch(refreshToken())
   },[dispatch])
 
+  useEffect(() => {
+    if(auth.token) dispatch(getPosts(auth.token))
+  },[dispatch, auth.token])
 
   
   return (
@@ -28,10 +32,10 @@ function App() {
 
     <Notify />
     <input type='checkbox' id='theme' />
-    <div className="App">
+    <div className="App overflow-visible">
     {auth.token && <Header />}
     {status && <StatusModal />}
-      <div className='main max-w-[1500px] w-[100%] m-auto' style={{ zIndex: '0'}}> 
+      <div className='main max-w-[1500px] w-[100%] m-auto'> 
         
         <Routes>
           <Route path='/' element={auth.token ? <Home /> : <Login />} />

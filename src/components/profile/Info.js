@@ -116,9 +116,9 @@ const Info = () => {
                   {/* <!-- user meta form medium screens --> */}
                   <div className="hidden md:block">
                     <h1 className="font-semibold">{user.fullName}</h1>
-                    <strong>
+                    <p>
                       <span>{user.email}</span>
-                    </strong>
+                    </p>
                     <p>
                       <Link
                         to={user.website}
@@ -133,9 +133,9 @@ const Info = () => {
                 {/* <!-- user meta form small screens --> */}
                 <div className="md:hidden text-sm my-2">
                   <h1 className="font-semibold">{user.fullName}</h1>
-                  <strong>
+                  <p>
                     <span>{user.email}</span>
-                  </strong>
+                  </p>
                   <p>
                     <Link
                       to={user.website}

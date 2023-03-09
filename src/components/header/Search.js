@@ -43,7 +43,7 @@ const Search = () => {
           <span className="absolute inset-y-0 left-0 flex items-center pl-2">
             <button
               type="submit"
-              className="p-1 focus:outline-none focus:shadow-outline absolute z-50"
+              className={`p-1 focus:outline-none focus:shadow-outline absolute z-50 ${search ? `ml-1` : ''}`}
             >
               <svg
                 fill="none"
@@ -61,7 +61,7 @@ const Search = () => {
           <div
             className={
               search
-                ? `transition duration-300 flex justify-center items-center w-[218px] py-1  bg-white drop-shadow-lg`
+                ? `transition duration-300 flex justify-center items-center py-1  drop-shadow-lg`
                 : ""
             }
           >
@@ -70,14 +70,14 @@ const Search = () => {
               onChange={(e) =>
                 setSearch(e.target.value.toLocaleLowerCase().replace(/ /s, ""))
               }
-              className="py-2 text-sm text-black bg-gray-100 rounded-full border-none pl-10 outline-none focus:ring-0 focus:text-gray-900 relative"
+              className="py-2 text-sm text-black bg-gray-100 rounded-full w-[210px] border-none pl-10 outline-none focus:ring-0 focus:text-gray-900 relative"
               placeholder="Search Splinter"
               autoComplete="off"
             />
           </div>
           <div
             onClick={handleClose}
-            className="absolute top-[.1rem] text-2xl text-red-600 z-50 cursor-pointer left-[10.8rem]"
+            className="absolute top-[.3rem] text-2xl text-red-600 z-50 cursor-pointer left-[12.4rem]"
             style={{ opacity: users.length === 0 ? 0 : 1 }}
           >
             &times;

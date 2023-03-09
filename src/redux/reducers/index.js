@@ -5,7 +5,7 @@ import notify from './notifyReducer'
 import theme from './themeReducer'
 import profile from './profileReducer'
 import status from './statusReducer'
-import homePost from './postReducer'
+import homePosts from './postReducer'
 export default combineReducers({
     
 auth,
@@ -13,5 +13,5 @@ auth,
  profile,
  theme,
 status,
- homePost,
+ homePosts,
 })
