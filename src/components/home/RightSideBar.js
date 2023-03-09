@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp} from 'react-icons/fa';
 const RightSideBar = () => {
   return (
     
-          <div className=' bg-white hidden xl:flex xl:flex-col ml-8 border rounded-xl w-[22rem] h-[30rem] mt-3 drop-shadow-lg p-4 z-auto'>
+          <div className=' bg-white hidden xl:flex xl:flex-col ml-6 border rounded-xl w-[22rem] h-[30rem] mt-3 drop-shadow-lg p-4 z-auto'>
               <h5 className='text-[1.5rem] mb-[1rem]'>Just Say Hi!</h5>
               <p className='text-[0.85rem] mb-[1rem]'>I am based in Gingoog City, Philippines <br /> You can contact me via the form or at cervantes.klc@gmail.com</p>
         

@@ -36,7 +36,9 @@ const Header = () => {
                    <div className="nav-item dropdown" style={{opacity: 1}} >
                         
                         <div className='hidden lg:flex'>
-                        <img src={Logo} style={{width:'40px'}} />
+                        <Link to='/'>
+                        <img src={Logo} style={{width:'40px'}} onClick={() => window.scrollTo({top: 0})}/>
+                        </Link>
                         </div>
                     <div className="nav-link lg:hidden" id="navbarDropdown" 
                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

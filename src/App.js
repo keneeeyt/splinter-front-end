@@ -15,7 +15,7 @@ import { Navigate } from 'react-router-dom';
 import { getPosts } from './redux/action/postAction';
 
 function App() {
-  const { auth, status } = useSelector(state => state)
+  const { auth, status, modal } = useSelector(state => state)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function App() {
 
     <Notify />
     <input type='checkbox' id='theme' />
-    <div className="App overflow-visible">
+    <div className={`App ${(status || modal) && 'mode' }`}>
     {auth.token && <Header />}
     {status && <StatusModal />}
       <div className='main max-w-[1500px] w-[100%] m-auto'> 

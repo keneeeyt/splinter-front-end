@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import FollowBtn from "../FollowBtn";
 import Followers from "./Followers";
 import Following from "./Following";
+import { TYPES } from "../../redux/action/notifyAction";
 
 const Info = () => {
   const { id } = useParams();
@@ -29,8 +30,16 @@ const Info = () => {
     }
   }, [id, auth, dispatch, profile.users]);
 
+  useEffect(() => {
+    if(showFollowers || showFollowing || onEdit){
+      dispatch({type: TYPES.MODAL, payload: true})
+    } else {
+      dispatch({type: TYPES.MODAL, payload: false})
+    }
+  },[showFollowers, showFollowing, onEdit])
+
   return (
-    <div className="info">
+    <div className="info mt-[90px]">
       {userData.map((user) => (
         <div className="" key={user._id}>
           <main className="bg-gray-100 bg-opacity-25">
@@ -48,7 +57,7 @@ const Info = () => {
                 </div>
                 {/* <!-- profile meta --> */}
                 <div className="w-8/12 md:w-7/12 ml-4">
-                  <div className="md:flex md:flex-wrap md:items-center mb-4">
+                  <div className="md:flex flex-row md:flex-wrap items-center mb-4">
                     <h2 className="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
                       {user.userName}
                     </h2>
@@ -70,7 +79,7 @@ const Info = () => {
                       <button
                         onClick={() => setOnEdit(true)}
                         className="bg-[#F37223] px-2 hover:bg-[#F89C1C] py-1 
-                      text-white font-semibold text-sm rounded  text-center 
+                      text-white font-semibold text-xl rounded  text-center 
                       sm:inline-block block"
                       >
                         Edit Profile
@@ -81,7 +90,7 @@ const Info = () => {
                   </div>
 
                   {/* <!-- post, following, followers list for medium screens --> */}
-                  <ul className="hidden md:flex space-x-8 mb-4">
+                  <ul className=" hidden md:flex space-x-8 mb-4">
                     <li>
                       <span className="font-semibold">0</span>
                       <p className="cursor-pointer hover:underline text-[#F89C1C]">
@@ -131,7 +140,7 @@ const Info = () => {
                   </div>
                 </div>
                 {/* <!-- user meta form small screens --> */}
-                <div className="md:hidden text-sm my-2">
+                <div className="md:hidden text-lg my-2">
                   <h1 className="font-semibold">{user.fullName}</h1>
                   <p>
                     <span>{user.email}</span>
@@ -161,7 +170,7 @@ const Info = () => {
                 {/* <!-- user following for mobile only --> */}
                 <ul
                   className="flex md:hidden justify-around space-x-8 border-t 
-              text-center p-2 text-gray-600 leading-snug text-sm"
+              text-center p-2 text-gray-600 leading-snug text-md"
                 >
                   <li>
                     <span className="font-semibold text-gray-800 block">0</span>

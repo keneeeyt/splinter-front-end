@@ -12,6 +12,7 @@ export const POST_TYPES = {
     LOADING_POST: 'LOADING_POST',
     GET_POSTS: 'GET_POSTS',
     UPDATE_POST: 'UPDATE_POST'
+
 }
 
 export const createPost = ({content, images, auth}) => async (dispatch) => {
@@ -71,3 +72,36 @@ export const updatePost = ({content, images, auth, status}) => async (dispatch) 
         })
     }
 }
+
+export const likePost = ({post, auth}) => async (dispatch) => {
+
+    const newPost = {...post, likes:[...post.likes, auth.user]}
+    dispatch({type:POST_TYPES.UPDATE_POST, payload: newPost})
+
+    try{
+            await patchData(`post/${post._id}/like`, null, auth.token)
+    }catch(err){
+        dispatch({
+            type:TYPES.NOTIFY,
+            payload: {error: err.response.data.msg}
+        })
+    }
+    
+} 
+
+export const unLikePost = ({post, auth}) => async (dispatch) => {
+   
+    const newPost = {...post,likes: post.likes.filter(like => like._id !== auth.user._id)}
+  
+    dispatch({type:POST_TYPES.UPDATE_POST, payload: newPost})
+
+    try{
+            await patchData(`post/${post._id}/unlike`, null, auth.token)
+    }catch(err){
+        dispatch({
+            type:TYPES.NOTIFY, 
+            payload: {error: err.response.data.msg}
+        })
+    }
+    
+} 

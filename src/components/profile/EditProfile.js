@@ -43,9 +43,9 @@ const EditProfile = ({ user, setOnEdit }) => {
       setOnEdit(false)
   }
   return (
-    <div className="fixed top-0 left-0 w-full h-[100vh] bg-[#0008] z-10 overflow-auto">
-    <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+    <div className="fixed top-0 left-0 w-full h-[100vh] bg-[#0008] z-50  overflow-auto">
+    <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  md:h-screen lg:py-0">
+      <div className="w-full bg-white rounded-lg shadow dark:border mt-[50px]  md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
         <div
           onClick={() => setOnEdit(false)}
           className="w-full px-4 py-2 text-xl text-[#F26F21] flex justify-end cursor-pointer"
